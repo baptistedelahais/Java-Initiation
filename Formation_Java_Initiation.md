@@ -151,10 +151,10 @@ la méthode **main** est le point d’entrée du programme
 
 ## Convention de nommage
 
-Par convention on écrira : 
-        les noms de **package** en **minuscules**,
-        les noms de **classe** en **PascalCase**,
-        les noms de **méthodes** en **camelCase**.
+Par convention on écrira :
+les noms de **package** en **minuscules**,
+les noms de **classe** en **PascalCase**,
+les noms de **méthodes** en **camelCase**.
 On utilisera des noms significatifs et on évitera les abréviations inutiles.
 
 ---
@@ -368,7 +368,7 @@ do {
 
 ---
 
-## `switch` en Java
+### `switch` en Java
 
 ```java
 int jour = 3;
@@ -383,7 +383,6 @@ switch (jour) {
         System.out.println("Autre jour");
 }
 ```
-
 
 ---
 
@@ -486,7 +485,6 @@ Une classe peut être vue comme une combinaison de deux éléments principaux :
 
 ---
 
-
 ## Détails Importants sur une Classe en Java
 
 **Déclaration d'une classe**
@@ -501,7 +499,7 @@ Une classe peut être vue comme une combinaison de deux éléments principaux :
 
 ---
 
-## Exemple de Syntaxe de Base
+### Exemple de Syntaxe de Base
 
 ```java
 public class NomDeLaClasse {
@@ -543,7 +541,7 @@ En Java, les getters et setters sont des méthodes d'accès utilisées pour cont
 
 ---
 
-## Exemple de Base : Sans Getters/Setters
+### Exemple de Base : Sans Getters/Setters
 
 ```java
 public class Personne {
@@ -566,7 +564,7 @@ public class Main {
 
 ---
 
-## Implémentation avec Getters et Setters
+### Implémentation avec Getters et Setters
 
 ```java
 public class Personne {
@@ -603,7 +601,7 @@ public class Main {
 
 ---
 
-**Constructeur**
+## Constructeur
 
 - Le constructeur est une méthode spéciale utilisée pour initialiser un objet lors de sa création.
 - Le constructeur porte le même nom que la classe et n'a pas de type de retour (pas même void).
@@ -624,8 +622,7 @@ public class Personne {
 
 ---
 
-
-**Méthodes**
+## Méthodes
 
 - Les méthodes permettent de définir le comportement de la classe. Elles sont utilisées pour manipuler les attributs de l'objet ou effectuer des actions spécifiques.
 - Une méthode a un type de retour (par exemple int, String, ou void si aucune valeur n'est retournée).
@@ -643,7 +640,7 @@ public int ajouter(int a, int b) {
 
 ---
 
-**Accès aux membres d'une classe**
+## Accès aux membres d'une classe
 
 - Les membres de la classe (attributs et méthodes) peuvent avoir des niveaux d'accessibilité variés.
 
@@ -713,7 +710,7 @@ p.afficherDetails();         // Appelle une méthode de l'objet p
 
 ---
 
-## Exemple d'Utilisation d'une Classe avec Objet
+## Exemple d'Utilisation d'une Classe 
 
 ```java
 public class Personne {
@@ -932,7 +929,7 @@ class Personne {
 
 ---
 
-## Exemple concret : Gestion d’un Compte Bancaire
+### Exemple concret : Gestion d’un Compte Bancaire
 
 Imagine que tu crées une application bancaire. Un compte bancaire possède un solde, mais on ne doit pas pouvoir modifier directement ce solde depuis l'extérieur.
 
@@ -997,7 +994,7 @@ public class Main {
 
 ---
 
-## Accès aux attributs de la classe parent (super)
+### Accès aux attributs de la classe parent (super)
 
 Si la classe parent contient des attributs, la classe fille peut les utiliser et même les modifier avec super.
 
@@ -1032,7 +1029,7 @@ public class Main {
 
 ---
 
-## Surcharge (@Override) d’une méthode
+### Surcharge (@Override) d’une méthode
 
 Une classe fille peut modifier le comportement d’une méthode héritée avec l'annotation @Override.
 
@@ -1066,7 +1063,7 @@ public class Main {
 
 ---
 
-## Héritage et visibilité (public, protected, private)
+### Héritage et visibilité (public, protected, private)
 
 | Modificateur | Accessible dans la classe fille ? | Accessible en dehors du package ? |
 | ------------ | --------------------------------- | --------------------------------- |
@@ -1117,7 +1114,7 @@ public class Test {
 
 ---
 
-## Exemple concret : Différentes formes de paiement
+### Exemple concret : Différentes formes de paiement
 
 Une boutique en ligne propose plusieurs moyens de paiement : Carte Bancaire, PayPal, Crypto. Ils ont une méthode commune payer().
 
@@ -1170,7 +1167,7 @@ class Voiture extends Vehicule {
 
 ---
 
-## Exemple concret : Formes géométriques
+### Exemple concret : Formes géométriques
 
 On veut modéliser des formes (cercle, carré, rectangle), mais chaque forme a une manière différente de calculer son aire.
 
@@ -1220,23 +1217,25 @@ public class TestFormes {
 
 ---
 
-
 ## Les exceptions en Java
-Une **exception** est un événement qui interrompt le déroulement normal d'un programme en Java.  
-Elle survient lorsqu'une erreur se produit à l'exécution.  
 
-###  Pourquoi gérer les exceptions ?
-    ✅ Éviter les crashs brutaux 
-    ✅ Améliorer la lisibilité et la maintenance 
-    ✅ Gérer proprement les erreurs  
+Une **exception** est un événement qui interrompt le déroulement normal d'un programme en Java.  
+Elle survient lorsqu'une erreur se produit à l'exécution.
+
+### Pourquoi gérer les exceptions ?
+
+    ✅ Éviter les crashs brutaux
+    ✅ Améliorer la lisibilité et la maintenance
+    ✅ Gérer proprement les erreurs
 
 ---
 
 ## Types d'Exceptions
 
 ### **Checked Exceptions (Vérifiées)**
+
 - **Détectées à la compilation** (ie lors de la conversion du code source en code machine et traduit le code java en bytecode) → Doivent être gérées avec `try-catch` ou `throws`.
-- Exemples :  
+- Exemples :
   - `IOException` (Erreur d'entrée/sortie)
   - `SQLException` (Erreur liée aux bases de données)
   - `FileNotFoundException` (Fichier introuvable)
@@ -1257,13 +1256,13 @@ public class ExempleChecked {
 
 ---
 
-## **Unchecked Exceptions (Non Vérifiées)**
+### **Unchecked Exceptions (Non Vérifiées)**
 
 - **Se produisent à l'exécution** (lorsque le bytecode est interprété et exécuté par la **JVM (Java Virtual Machine)**).
 - Exemples :
-    - ArithmeticException (ex. division par zéro)
-    - NullPointerException (ex. accès à un objet null)
-    - ArrayIndexOutOfBoundsException (ex. accès hors limites d’un tableau)
+  - ArithmeticException (ex. division par zéro)
+  - NullPointerException (ex. accès à un objet null)
+  - ArrayIndexOutOfBoundsException (ex. accès hors limites d’un tableau)
 
 ```java
 public class ExempleUnchecked {
@@ -1272,11 +1271,12 @@ public class ExempleUnchecked {
         System.out.println(nombres[5]); // Erreur : Index hors limites
     }
 }
-``` 
+```
 
 ---
 
-## Gestion des Exceptions en Java
+### Gestion des Exceptions en Java
+
 1️⃣ try-catch
 
 Permet de capturer et gérer une exception.
@@ -1302,6 +1302,7 @@ try {
     System.out.println("Ce bloc sera toujours exécuté !");
 }
 ```
+
 ---
 
 3️⃣ throws
@@ -1323,8 +1324,7 @@ public static void main(String[] args) {
 
 ---
 
-
-## Création d'une Exception Personnalisée
+### Création d'une Exception Personnalisée
 
 On peut créer nos propres exceptions en héritant de Exception ou RuntimeException.
 
@@ -1344,8 +1344,7 @@ public class Test {
         }
     }
 }
-``` 
-
+```
 
 ---
 
@@ -1386,7 +1385,7 @@ Attention vous devez empêcher la création d'un athlète avec un nom vide ou nu
 
 ---
 
-## Correction Interface `Entrainable`
+### Correction Interface `Entrainable`
 
 <details>
   <summary>Afficher le code</summary>
@@ -1399,7 +1398,7 @@ interface Entrainable {
 
 </details>
 
-## Correction gestion des noms vide ou null
+### Correction gestion des noms vide ou null
 
 <details>
   <summary>Afficher le code</summary>
@@ -1417,7 +1416,7 @@ class NomInvalideException extends RuntimeException {
 
 ---
 
-## Correction : Classe `Athlete`
+### Correction : Classe `Athlete`
 
 <details>
   <summary>Afficher le code</summary>
@@ -1478,7 +1477,7 @@ public class Athlete implements Entrainable {
 
 ---
 
-## Correction : Classe `AthleteElite` (Héritage)
+### Correction : Classe `AthleteElite` (Héritage)
 
 <details>
   <summary>Afficher le code</summary>
@@ -1514,7 +1513,7 @@ public class AthleteElite extends Athlete {
 
 ---
 
-## Correction : Classe `ProgrammeSportif`
+### Correction : Classe `ProgrammeSportif`
 
 <details>
   <summary>Afficher le code</summary>
