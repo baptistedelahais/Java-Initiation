@@ -1674,6 +1674,7 @@ Le métier avait besoin de créer et de maj une variable en bdd lors du lancemen
 - Documentation officielle Java : [Java Documentation](https://docs.oracle.com/en/java/)
 - Tutoriels Java : [Java Tutorial](https://www.javatpoint.com/java-tutorial)
 - wiki insee : [Aide Installation Logiciel Insee](https://gitlab.insee.fr/animation-developpement/outils-de-dev/-/wikis/Outils/_index)
+- GitHub de la présentation [Présentation Java Initiation](https://github.com/baptistedelahais/Java-Initiation)
 
 ---
 
