@@ -1559,6 +1559,44 @@ public class ProgrammeSportif {
 
 ---
 
+## Les Streams  
+
+✅ Pourquoi utiliser les Streams ?
+
+    Écriture plus concise et plus lisible
+    Optimisation automatique (parallélisme possible)
+    Évite les boucles complexes
+    permettent de manipuler des collections de données de manière fluide et optimisée.
+
+---
+
+### Exemple d'utilisation des Streams
+
+```java
+import java.util.Arrays;
+import java.util.List;
+
+public class ExempleStream {
+    public static void main(String[] args) {
+        List<String> noms = Arrays.asList("Alice", "Bob", "Charlie", "David", "Eve");
+
+        // Afficher les noms qui commencent par 'A' en utilisant un Stream
+        noms.stream()
+            .filter(nom -> nom.startsWith("A"))
+            .forEach(System.out::println);
+    }
+}
+```
+
+Ce que fait ce code :
+
+    Crée une liste de noms.
+    Filtre les noms qui commencent par "A".
+    Affiche les résultats directement.
+
+
+---
+
 ## A l'Insee
 
 ---
@@ -1620,12 +1658,22 @@ Les nouvelles technologies comme Spring Boot, React et Docker sont adoptées pou
 
 ---
 
+## Exemple de développement sur l'application origami
+
+Le métier avait besoin de créer et de maj une variable en bdd lors du lancement d'un batch. 
+
+1. Tirer une nouvelle branche 
+2. Faire une modification sur le batch
+3. Vérifier le fonctionnement
+4. Déployer sur un environnement de recette
+
 ---
 
-## Références
+## Liens utiles
 
-- Documentation officielle Java : [https://docs.oracle.com/en/java/](https://docs.oracle.com/en/java/)
-- Tutoriels Java : [https://www.javatpoint.com/java-tutorial](https://www.javatpoint.com/java-tutorial)
+- Documentation officielle Java : [Java Documentation](https://docs.oracle.com/en/java/)
+- Tutoriels Java : [Java Tutorial](https://www.javatpoint.com/java-tutorial)
+- wiki insee : [Aide Installation Logiciel Insee](https://gitlab.insee.fr/animation-developpement/outils-de-dev/-/wikis/Outils/_index)
 
 ---
 
