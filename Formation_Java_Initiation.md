@@ -93,9 +93,9 @@ L'opérateur + permet ici de faire de la concaténation de chaine de caractère.
 
 1. **Ouvrir Eclipse** → File > New > Java Project
 2. **Nommer le projet** et cliquer sur _Finish_
-3. **Créer une classe** : Clic droit sur `src` → New > Class
-4. **Nommer la classe** (ex: `Exercice1`) et cocher `public static void main(String[] args)`
-5. **Cliquer sur Finish**
+3. **Créez une package** : Clic droit sur `src` → New > Package
+4. **Créez une classe** Clic droit sur `monpackage` → New > Class (ex: `Exercice1`) et cocher `public static void main(String[] args)`
+5. **Cliquez sur Finish**
 6. **Compilez** clic droit > Run as > Java application
 
 Si vous n'avez pas encore installé votre IDE vous pouvez commencer à coder sur https://www.online-java.com/
@@ -388,9 +388,11 @@ switch (jour) {
 
 ## Exercice 2 : Gestion d'un emploi du temps
 
-Imagine que tu es responsable d'un emploi du temps pour une petite équipe. Voici les tâches à réaliser :
+Pour que votre projet reste clair, créez un nouveau package et une nouvelle classe.
 
-- Créer un tableau de String qui contiendra les noms des 5 membres de l'équipe.
+Vous êtes responsable d'un emploi du temps pour une petite équipe. Voici les tâches à réaliser :
+
+- Créer un tableau qui contiendra les noms des 5 membres de l'équipe.
 - Afficher les noms des membres de l'équipe à l'aide d'une boucle for.
 - Utiliser une condition pour vérifier si un membre spécifique, par exemple "Alice", est présent dans le tableau. Si oui, afficher "Alice est dans l'équipe" ; sinon, afficher "Alice n'est pas dans l'équipe".
 - Ajouter un nouveau membre à l'équipe et afficher la liste mise à jour.
@@ -430,7 +432,7 @@ public class EmploiDuTemps {
         }
 
         // 4. Ajouter un nouveau membre
-        String nouveauMembre = "Baptiste";
+        String nouveauMembre = "Leon";
         membres.add(nouveauMembre);
 
         // 5. Afficher la nouvelle liste des membres
@@ -710,7 +712,7 @@ p.afficherDetails();         // Appelle une méthode de l'objet p
 
 ---
 
-## Exemple d'Utilisation d'une Classe 
+## Exemple d'Utilisation d'une Classe
 
 ```java
 public class Personne {
@@ -1637,6 +1639,6 @@ Les nouvelles technologies comme Spring Boot, React et Docker sont adoptées pou
 
 ---
 
-# Merci ! 🎉
+## Merci ! 🎉
 
 Des questions ? 🤔

@@ -26,7 +26,7 @@ public class EmploiDuTemps {
         }
 
         // 4. Ajouter un nouveau membre
-        String nouveauMembre = "Baptiste";
+        String nouveauMembre = "Leon";
         membres.add(nouveauMembre);
 
         // 5. Afficher la nouvelle liste des membres
