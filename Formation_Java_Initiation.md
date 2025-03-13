@@ -1607,7 +1607,8 @@ Les applications sont généralement organisées sous forme de projets Maven mul
 
 ---
 
-![ArchiOctavie](archiOctavie.png)
+<img src="architectureOctavie.png" alt="ArchitectureOctavie" width="600">
+
 
 ---
 
