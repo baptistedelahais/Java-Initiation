@@ -104,12 +104,8 @@ Si vous n'avez pas encore installé votre IDE vous pouvez commencer à coder sur
 
 ## Création d'une classe dans Vs Code
 
-1. **Créez un projet Java**
-
-   Ouvrez VsCode
-   Nouveau Fichier > New Java Project > No build tools
-
-2. **Créez un package** Clic droit New Java Package
+1. **Créez un projet Java** Ouvrez VsCode > Nouveau Fichier > New Java Project > No build tools
+2. **Créez un package** Clic droit > New Java Package
 3. **Créez un classe** Sur le package clic droit New Java File > class > Exercice1.java
    ```java
    package monpackage;
