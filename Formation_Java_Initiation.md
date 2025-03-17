@@ -863,6 +863,198 @@ public class GestionPersonnes {
 
 ---
 
+## Exercice : Gestion d'un Zoo
+
+Vous allez programmer un système de gestion de zoo en Java. Chaque animal du zoo a un âge maximum : lorsqu’il l’atteint, il meurt et est retiré du zoo.
+
+1. Créer une classe Animal
+
+Chaque animal doit avoir les attributs suivants :
+
+    nom (String) → Nom de l’animal
+    espece (String) → Espèce de l’animal
+    age (int) → Âge actuel de l’animal
+    ageMax (int) → Âge maximum avant sa mort
+
+Et les méthodes suivantes :
+
+    presenter() → Affiche les informations de l’animal
+    vieillir() → Augmente l’âge de l’animal de 1 an
+        Si l’animal atteint son âge maximum, il meurt (affichage d’un message et retour false)
+        Sinon, il continue à vivre (retour true)
+
+---
+
+2. Créer une classe Zoo
+
+Le zoo doit contenir une liste d’animaux et permettre :
+
+    ajouterAnimal(Animal animal) → Ajouter un animal au zoo
+    afficherAnimaux() → Afficher tous les animaux encore vivants
+    faireVieillirTous() → Faire vieillir tous les animaux du zoo
+        Les animaux qui atteignent leur âge maximum sont retirés du zoo
+
+3. Créer une classe Main pour tester
+
+Dans cette classe, vous devez :
+
+    Créer un zoo
+    Ajouter plusieurs animaux (Lion, Elephant, Girafe) avec des âges et des âges maximums différents
+    Afficher les animaux du zoo
+    Simuler plusieurs années avec des appels successifs à faireVieillirTous()
+    Afficher l’évolution du zoo au fil des ans
+
+---
+
+## Correction Exercice Zoo
+
+<details>
+  <summary>Afficher le code</summary>
+
+```java
+import java.util.ArrayList;
+import java.util.List;
+
+// Classe Animal
+class Animal {
+    private String nom;
+    private String espece;
+    private int age;
+    private int ageMax; // Âge maximum avant la mort
+
+    // Constructeur
+    public Animal(String nom, String espece, int age, int ageMax) {
+        this.nom = nom;
+        this.espece = espece;
+        this.age = age;
+        this.ageMax = ageMax;
+    }
+
+    // Méthode pour afficher les informations de l’animal
+    public void presenter() {
+        System.out.println("Je suis " + nom + ", un(e) " + espece + " de " + age + " an(s).");
+    }
+
+    // Méthode pour faire vieillir l’animal
+    public boolean vieillir() {
+        age++;
+        if (age >= ageMax) {
+            System.out.println(nom + " a atteint l'âge maximum et est mort...");
+            return false; // Indique que l'animal doit être supprimé
+        } else {
+            System.out.println(nom + " a maintenant " + age + " an(s).");
+            return true; // Indique que l'animal est toujours en vie
+        }
+    }
+
+    // Getter pour le nom (utile pour afficher les messages dans Zoo)
+    public String getNom() {
+        return nom;
+    }
+}
+```
+
+</details>
+
+---
+
+<details>
+  <summary>Afficher le code</summary>
+
+```java
+// Classe Zoo
+class Zoo {
+    private String nom;
+    private List<Animal> animaux;
+
+    // Constructeur
+    public Zoo(String nom) {
+        this.nom = nom;
+        this.animaux = new ArrayList<>();
+    }
+
+    // Méthode pour ajouter un animal au zoo
+    public void ajouterAnimal(Animal animal) {
+        animaux.add(animal);
+        System.out.println(animal.getNom() + " a été ajouté au zoo " + nom + ".");
+    }
+
+    // Méthode pour afficher tous les animaux du zoo
+    public void afficherAnimaux() {
+        System.out.println("\nLes animaux du zoo " + nom + " :");
+        if (animaux.isEmpty()) {
+            System.out.println("Le zoo est vide...");
+        } else {
+            for (Animal animal : animaux) {
+                animal.presenter();
+            }
+        }
+    }
+
+    // Méthode pour faire vieillir tous les animaux et enlever ceux qui meurent
+    public void faireVieillirTous() {
+        System.out.println("\nTous les animaux du zoo " + nom + " vieillissent...");
+
+        // Nouvelle liste pour stocker les animaux survivants
+        List<Animal> survivants = new ArrayList<>();
+
+        // Boucle classique `for`
+        for (int i = 0; i < animaux.size(); i++) {
+            Animal animal = animaux.get(i);
+            if (animal.vieillir()) {
+                survivants.add(animal); // L'animal survit, on le garde
+            }
+        }
+
+        // Mise à jour de la liste du zoo avec les survivants
+        animaux = survivants;
+    }
+}
+
+
+```
+
+</details>
+
+---
+
+<details>
+  <summary>Afficher le code</summary>
+
+```java
+// Classe principale Main
+public class Main {
+    public static void main(String[] args) {
+        // Création du zoo
+        Zoo monZoo = new Zoo("Safari Land");
+
+        // Création des animaux avec un âge maximum
+        Animal lion = new Animal("Simba", "Lion", 3, 10);
+        Animal elephant = new Animal("Dumbo", "Éléphant", 5, 15);
+        Animal girafe = new Animal("Melman", "Girafe", 7, 12);
+
+        // Ajout des animaux au zoo
+        monZoo.ajouterAnimal(lion);
+        monZoo.ajouterAnimal(elephant);
+        monZoo.ajouterAnimal(girafe);
+
+        // Affichage des animaux du zoo
+        monZoo.afficherAnimaux();
+
+        // Simulation du passage du temps (plusieurs années)
+        for (int i = 0; i < 10; i++) {
+            System.out.println("\n--- Année " + (i + 1) + " ---");
+            monZoo.faireVieillirTous();
+            monZoo.afficherAnimaux();
+        }
+    }
+}
+```
+
+</details>
+
+---
+
 ## Interfaces en Java
 
 - Une **interface** définit un contrat que les classes doivent respecter. Elle permet de spécifier des méthodes que les classes implémentant l'interface doivent définir, mais sans fournir de détail sur la manière dont elles le feront.
@@ -1555,7 +1747,7 @@ public class ProgrammeSportif {
 
 ---
 
-## Les Streams  
+## Les Streams
 
 ✅ Pourquoi utiliser les Streams ?
 
@@ -1590,7 +1782,6 @@ Ce que fait ce code :
     Filtre les noms qui commencent par "A".
     Affiche les résultats directement.
 
-
 ---
 
 ## A l'Insee
@@ -1608,7 +1799,6 @@ Les applications sont généralement organisées sous forme de projets Maven mul
 ---
 
 <img src="architectureOctavie.png" alt="ArchitectureOctavie" width="600">
-
 
 ---
 
@@ -1657,9 +1847,9 @@ Les nouvelles technologies comme Spring Boot, React et Docker sont adoptées pou
 
 ## Exemple de développement sur l'application origami
 
-Le métier avait besoin de créer et de maj une variable en bdd lors du lancement d'un batch. 
+Le métier avait besoin de créer et de maj une variable en bdd lors du lancement d'un batch.
 
-1. Tirer une nouvelle branche 
+1. Tirer une nouvelle branche
 2. Faire une modification sur le batch
 3. Vérifier le fonctionnement
 4. Déployer sur un environnement de recette
