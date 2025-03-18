@@ -1,10 +1,13 @@
 package exercice4;
 
+import java.util.Random;
+
 public class Athlete implements Entrainable {
     protected String nom;
     private int force;
-
+    private Random random = new Random(); // Générateur aléatoire
     // Constructeur avec vérification du nom
+
     public Athlete(String nom) {
         if (nom == null || nom.trim().isEmpty()) {
             throw new NomInvalideException("Le nom d'un athlète ne peut pas être vide ou null !");
@@ -15,8 +18,14 @@ public class Athlete implements Entrainable {
 
     @Override
     public void entrainement() {
-        setForce(this.force + 10);
-        System.out.println(nom + " s'entraîne et gagne 10 points de force !");
+        double chance = random.nextDouble(); // Valeur entre 0 et 1
+
+        if (chance < 0.7) { // 70% de chance de réussite
+            setForce(this.force + 10);
+            System.out.println(nom + " s'entraîne avec succès et gagne 10 points de force !");
+        } else { // 30% de chance de se blesser
+            seBlesse();
+        }
     }
 
     public void manger() {
@@ -27,6 +36,11 @@ public class Athlete implements Entrainable {
     public void repos() {
         setForce(this.force + 5);
         System.out.println(nom + " se repose et récupère 5 points de force.");
+    }
+
+    public void seBlesse() {
+        setForce(this.force - 15);
+        System.out.println(nom + " s'est blessé et perd 30 points de force !");
     }
 
     public void afficherInfos() {

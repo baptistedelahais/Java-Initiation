@@ -1,4 +1,7 @@
 package exercice4;
+
+import java.util.Random;
+
 public class AthleteElite extends Athlete {
 
     public AthleteElite(String nom) {
@@ -7,8 +10,14 @@ public class AthleteElite extends Athlete {
 
     @Override
     public void entrainement() {
-        setForce(getForce() + 20);
-        System.out.println(nom + " (Élite) s'entraîne et gagne 20 points de force !");
+        double chance = new Random().nextDouble(); // Valeur entre 0 et 1
+
+        if (chance < 0.8) { // 80% de chance de réussir
+            setForce(this.getForce() + 15);
+            System.out.println(nom + " s'entraîne intensément et gagne 15 points de force !");
+        } else { // 20% de risque de blessure
+            seBlesse();
+        }
     }
 
     @Override
