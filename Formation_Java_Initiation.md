@@ -26,7 +26,7 @@ h3 {
 }
 </style>
 
-# Initiation à Java
+# Bienvenue à Initiation à Java
 
 ---
 
