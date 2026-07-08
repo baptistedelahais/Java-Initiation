@@ -1847,10 +1847,10 @@ Les nouvelles technologies comme Spring Boot, React et Docker sont adoptées pou
 
 ## Exemple de développement sur l'application origami
 
-Le métier avait besoin de créer et de maj une variable en bdd lors du lancement d'un batch.
+Le métier avait ce besoin : https://gitlab.insee.fr/ica/origami/-/work_items/150.
 
 1. Tirer une nouvelle branche
-2. Faire une modification sur le batch
+2. Faire une modification : https://gitlab.insee.fr/ica/origami/-/merge_requests/404
 3. Vérifier le fonctionnement
 4. Déployer sur un environnement de recette
 
