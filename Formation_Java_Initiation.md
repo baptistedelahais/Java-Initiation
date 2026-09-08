@@ -1848,8 +1848,7 @@ Les nouvelles technologies comme Spring Boot, React et Docker sont adoptées pou
 ## Exercice 5 : Tickets de maintenance sur l'application SuiviSportif
 
 Jusqu'ici, tout ce que vous avez codé tournait dans une console
-et partait de zéro. En réalité, à l'INSEE, vous n'allez presque 
-jamais créer une application de zéro :
+et partait de zéro. En réalité, à l'INSEE, vous allez rarement créer une application de zéro  :
 vous allez arriver sur du code déjà existant, 
 écrit par quelqu'un d'autre, et devoir y apporter des modifications
 ciblées à partir d'un ticket métier.
@@ -1864,9 +1863,199 @@ et vous traitez des tickets dessus.
 
 ---
 
+## Lancer l'application
+
+1. Prérequis : JDK 17 et Maven installés (java -version, mvn -version).
+2. Ouvrir le ReadMe.md de l'application et suivre les instructions pour la lancer
+3. Sur le serveur TomCat qui a démarré sur le port 8080 vous devez voir deux athlètes de démonstration (Alice, Bob) déjà présents avec quelques séances — l'appli n'est pas vide, comme une vraie appli sur laquelle vous arriveriez en poste 
+
+En cas de problème au lancement :
+
+- Port 8080 was already in use → changez server.port dans application.properties, ou fermez le processus qui occupe déjà le port.
+- Rien ne se passe dans le navigateur → vérifiez dans les logs que la ligne Started SuiviSportifApplication est bien apparue avant d'ouvrir la page.
 
 ---
 
+## Ticket #1 : Classer les athlètes par temps total d'entraînement
+
+- Ticket métier : "Sur la page d'accueil, l'entraîneur veut voir les athlètes classés du plus entraîné (temps total cumulé) au moins entraîné, plutôt que dans l'ordre où ils ont été ajoutés."
+<details>
+  <summary>Indices </summary>
+
+
+- Ajoutez une méthode dans SuiviSportifService qui renvoie la liste des athlètes triée par tempsTotalSecondes() décroissant, sans modifier la liste d'origine.
+- Comparator.comparingInt(...).reversed() fait tout le travail en une ligne.
+- Le contrôleur n'a qu'un seul mot à changer, pour appeler cette nouvelle méthode à la place de listerAthletes().
+</details>
+
+<details> <summary>Correction Ticket #1 — Afficher le code</summary>
+
+```declarative
+// SuiviSportifService.java - nouvelle méthode
+import java.util.Comparator;
+
+public List<Athlete> listerAthletesClasses() {
+return athletes.stream()
+.sorted(Comparator.comparingInt(Athlete::tempsTotalSecondes).reversed())
+.collect(Collectors.toList());
+}
+```
+```declarative
+// SuiviSportifController.java - une ligne modifiée
+@GetMapping("/")
+public String accueil(Model model) {
+    model.addAttribute("athletes", service.listerAthletesClasses());
+    return "accueil";
+}
+```
+
+</details>
+
+---
+## Ticket #2 : Interdire deux athlètes du même nom
+- Ticket métier : "On a eu deux fois 'Alice' dans la liste par erreur, ça fausse le classement. Il faut empêcher la création d'un athlète si un athlète du même nom existe déjà (peu importe la casse), avec un message clair pour l'utilisateur."
+<details>
+  <summary>Indices </summary>
+
+- Créez une exception dédiée, sur le même modèle que NomInvalideException.
+
+- Dans SuiviSportifService.ajouterAthlete(), vérifiez avec un Stream (anyMatch) si le nom existe déjà avant de créer l'athlète.
+</details>
+
+<details> <summary>Correction Ticket #2 — Afficher le code</summary>
+
+```declarative
+// model/AthleteDejaExistantException.java
+package fr.insee.formation.suivisportif.model;
+
+public class AthleteDejaExistantException extends RuntimeException {
+    public AthleteDejaExistantException(String message) {
+        super(message);
+    }
+}
+```
+```declarative
+// SuiviSportifService.java - méthode modifiée
+public Athlete ajouterAthlete(String nom) {
+    boolean existeDeja = athletes.stream()
+            .anyMatch(a -> a.getNom().equalsIgnoreCase(nom));
+    if (existeDeja) {
+        throw new AthleteDejaExistantException("Un athlète nommé \"" + nom + "\" existe déjà !");
+    }
+    Athlete athlete = new Athlete(nom); // peut aussi lever NomInvalideException si le nom est vide
+    athletes.add(athlete);
+    return athlete;
+}
+```
+
+Rien d'autre à faire : le gestionnaire d'erreur générique déjà présent dans SuiviSportifController (@ExceptionHandler(RuntimeException.class)) intercepte n'importe quelle RuntimeException levée par le service et l'affiche proprement sur la page.
+
+</details>
+
+
+---
+## Ticket #3 : Des athlètes "élite" qui progressent plus vite
+- Ticket métier : "Certains athlètes ont un statut 'élite' : ils gagnent deux fois plus de force à chaque séance que les athlètes classiques. Il faut pouvoir créer ce type d'athlète sans dupliquer tout le code de Athlete."
+
+<details>
+  <summary>Indices </summary>
+
+- Un ticket d'héritage et de polymorphisme pur.
+
+- Regardez la méthode gainForceParSeance() dans Athlete : elle a volontairement été extraite en protected, prête à être surchargée.
+
+- Créez une classe AthleteElite extends Athlete qui override cette méthode pour renvoyer un gain plus élevé.
+  
+- Ajoutez une méthode ajouterAthleteElite(String nom) dans le service.
+  
+- Vous n'avez rien à changer dans accueil.html ni dans le contrôleur : la page affichera les athlètes élites exactement comme les autres, sans même "savoir" qu'ils sont différents — c'est tout l'intérêt du polymorphisme.
+
+</details>
+
+<details> <summary>Correction Ticket #3 — Afficher le code</summary>
+
+```declarative
+// model/AthleteElite.java
+package fr.insee.formation.suivisportif.model;
+
+public class AthleteElite extends Athlete {
+
+public AthleteElite(String nom) {
+super(nom);
+}
+
+@Override
+protected int gainForceParSeance() {
+return 4; // le double du gain standard (2) défini dans Athlete
+}
+}
+```
+```declarative
+// SuiviSportifService.java - nouvelle méthode
+public Athlete ajouterAthleteElite(String nom) {
+Athlete athlete = new AthleteElite(nom);
+athletes.add(athlete);
+return athlete;
+}
+```
+
+Athlete.ajouterSeance() appelle this.gainForceParSeance() — donc pour une instance d'AthleteElite, c'est bien la version surchargée qui s'exécute, même si ajouterSeance() est codée une seule fois, dans la classe parente.
+</details>
+
+
+---
+## Ticket #4 : La figure préférée de chaque athlète
+- Ticket métier : "Pour personnaliser les conseils d'entraînement, l'entraîneur veut voir, pour chaque athlète, quelle figure il pratique le plus souvent (le plus grand nombre de séances), affichée directement sur la page."
+
+
+<details>
+  <summary>Indices </summary>
+
+- Un ticket Streams un cran au-dessus : regroupement et comptage.
+
+- Collectors.groupingBy(...) combiné à Collectors.counting() permet de compter le nombre de séances par figure en une seule instruction, sous forme de Map<String, Long>.
+  
+- Il reste ensuite à trouver l'entrée dont le compte est le plus élevé (Map.Entry.comparingByValue()).
+  
+- Gérez le cas d'un athlète qui n'a encore aucune séance (Optional).
+
+</details>
+
+<details> <summary>Correction Ticket #4 — Afficher le code</summary>
+
+```declarative
+// Athlete.java - nouvelle méthode
+import java.util.Map;
+import java.util.stream.Collectors;
+
+public Optional<String> figurePreferee() {
+return seances.stream()
+.collect(Collectors.groupingBy(Seance::getFigure, Collectors.counting()))
+.entrySet().stream()
+.max(Map.Entry.comparingByValue())
+.map(Map.Entry::getKey);
+}
+```
+```declarative
+<!-- accueil.html - une colonne ajoutée au tableau -->
+<th>Figure préférée</th>
+...
+<td th:text="${athlete.figurePreferee().orElse('—')}"></td>
+```
+
+</details>
+
+---
+
+## Aller plus loin : la démarche qualité
+
+Rendre l'application la plus qualitative possible. Pour cela on peut : 
+- augmenter la couverture de test (test unitaire JUnit sur les méthodes)
+- ajouter une page accessibilité et rendre l'application accessible
+- garder l'application et ses dépendances à jour (maintien en condition de sécurité)
+
+
+---
 
 ## Liens utiles
 
