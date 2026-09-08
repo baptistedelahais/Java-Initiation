@@ -2,7 +2,7 @@
 marp: true
 theme: uncover
 paginate: true
-footer: "© Mars 2025 - Baptiste Delahais - baptiste.delahais@insee.fr"
+footer: "© Septembre 2026 - Baptiste Delahais - baptiste.delahais@insee.fr"
 class: left
 ---
 
@@ -155,7 +155,7 @@ On utilisera des noms significatifs et on évitera les abréviations inutiles.
 
 ---
 
-## Exercice 1
+## Exercice 1 : Déclarer et afficher des variables
 
 Dans la classe Exercice1 :
 
