@@ -21,12 +21,12 @@ public class DonneesDemoInitializer implements CommandLineRunner {
     @Override
     public void run(String... args) {
         service.ajouterAthlete("Alice");
-        service.enregistrerSeance("Alice", "Planche", 12);
-        service.enregistrerSeance("Alice", "Planche", 16);
-        service.enregistrerSeance("Alice", "Front Lever", 8);
+        service.enregistrerSeance("Alice", "Handstand", 12);
+        service.enregistrerSeance("Alice", "Handstand", 16);
+        service.enregistrerSeance("Alice", "L-Sit", 8);
 
         service.ajouterAthlete("Bob");
-        service.enregistrerSeance("Bob", "One Arm Handstand", 5);
-        service.enregistrerSeance("Bob", "Front Lever", 10);
+        service.enregistrerSeance("Bob", "Front Lever", 5);
+        service.enregistrerSeance("Bob", "Handstand", 10);
     }
 }
