@@ -1845,8 +1845,22 @@ Les nouvelles technologies comme Spring Boot, React et Docker sont adoptées pou
 
 ---
 
-## Exercice 5 : Une mini-application web de suivi sportif (avec serveur Tomcat)
+## Exercice 5 : Tickets de maintenance sur l'application SuiviSportif
 
+Jusqu'ici, tout ce que vous avez codé tournait dans une console
+et partait de zéro. En réalité, à l'INSEE, vous n'allez presque 
+jamais créer une application de zéro :
+vous allez arriver sur du code déjà existant, 
+écrit par quelqu'un d'autre, et devoir y apporter des modifications
+ciblées à partir d'un ticket métier.
+
+C'est ce qu'on reproduit ici. 
+SuiviSportif est une petite application web déjà entièrement 
+codée et fonctionnelle (Spring Boot, Tomcat embarqué, Maven), 
+qui enregistre des séances d'entraînement d'athlètes 
+et les affiche dans le navigateur. 
+Vous ne la créez pas : vous la récupérez, vous la lancez,
+et vous traitez des tickets dessus.
 
 ---
 

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>SuiviSportif</title>
+</head>
+<body>
+
+    <h1>SuiviSportif</h1>
+
+    <h2>Ajouter un athlète</h2>
+    <form action="/athlete" method="post">
+        <input type="text" name="nomAthlete" placeholder="Nom de l'athlète" required>
+        <button type="submit">Ajouter l'athlète</button>
+    </form>
+
+    <h2>Enregistrer une séance</h2>
+    <form action="/seance" method="post">
+        <input type="text" name="nom" placeholder="Nom de l'athlète" required>
+        <input type="text" name="figure" placeholder="Figure (ex: Planche)" required>
+        <input type="number" name="duree" placeholder="Durée (secondes)" required>
+        <button type="submit">Enregistrer la séance</button>
+    </form>
+
+    <h2>Athlètes</h2>
+    <table border="1" cellpadding="6">
+        <tr>
+            <th>Nom</th>
+            <th>Force</th>
+            <th>Nb séances</th>
+            <th>Détail des séances</th>
+        </tr>
+        <tr th:each="athlete : ${athletes}">
+            <td th:text="${athlete.nom}"></td>
+            <td th:text="${athlete.force}"></td>
+            <td th:text="${athlete.seances.size()}"></td>
+            <td>
+                <ul>
+                    <li th:each="seance : ${athlete.seances}"
+                        th:text="${seance.figure} + ' - ' + ${seance.dureeSecondes} + 's'">
+                    </li>
+                </ul>
+            </td>
+        </tr>
+    </table>
+
+</body>
+</html>
