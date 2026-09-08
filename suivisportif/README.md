@@ -7,11 +7,13 @@ de la formation "Initiation à Java" — INSEE.
 
 Prérequis : JDK 17 et Maven installés (`java -version`, `mvn -version`).
 
-Depuis la racine du projet (là où se trouve `pom.xml`) :
+Depuis la racine du projet (là où se trouve `pom.xml`), ouvrez un terminal git bash et lancez : 
+
 
 ```
 mvn spring-boot:run
 ```
+vous devez vous trouver sur  ~/Documents/Projet/Java-Initiation/suivisportif (utiliser les commandes cd suivisportif ou cd .. au besoin)
 
 Ou, dans votre IDE :
 - **Eclipse** : clic droit sur le projet > Run As > Spring Boot App

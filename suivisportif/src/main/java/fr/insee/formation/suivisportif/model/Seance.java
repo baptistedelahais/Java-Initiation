@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 
 public class Seance {
 
-    private final String figure;
+    private final String figure;   // ex : "Planche", "Front Lever"
     private final int dureeSecondes;
     private final LocalDateTime date;
 

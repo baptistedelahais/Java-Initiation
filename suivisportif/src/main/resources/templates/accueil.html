@@ -8,6 +8,8 @@
 
     <h1>SuiviSportif</h1>
 
+    <p th:if="${erreur}" style="color:red;" th:text="${erreur}"></p>
+
     <h2>Ajouter un athlète</h2>
     <form action="/athlete" method="post">
         <input type="text" name="nomAthlete" placeholder="Nom de l'athlète" required>

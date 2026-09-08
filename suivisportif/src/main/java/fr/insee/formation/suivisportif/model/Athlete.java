@@ -20,7 +20,15 @@ public class Athlete {
 
     public void ajouterSeance(Seance s) {
         seances.add(s);
-        augmenterForce(2); // une séance de plus, un tout petit gain de force
+        augmenterForce(gainForceParSeance());
+    }
+
+    /**
+     * Gain de force appliqué à chaque séance. Pensé pour être surchargé
+     * par des sous-classes (voir AthleteElite).
+     */
+    protected int gainForceParSeance() {
+        return 2;
     }
 
     private void augmenterForce(int gain) {
