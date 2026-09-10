@@ -35,6 +35,8 @@ style: |
 - Boucles en Java
 - Exercice 2 : Gestion d'un emploi du temps
 
+---
+
 ### Programmation Orientée Objet (POO)
 - Java : langage orienté objet
 - Introduction à une classe en Java
@@ -55,6 +57,8 @@ style: |
 - Polymorphisme
 - Abstraction
 - Pourquoi utiliser la POO en Java ?
+
+---
 
 ### Exceptions, Streams et mise en pratique
 - Les exceptions en Java
